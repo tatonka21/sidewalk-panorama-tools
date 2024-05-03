@@ -61,7 +61,7 @@ def predict_crop_size_by_position(x, y, im_width, im_height):
 
     crop_size = (4.0 / 15.0) * min_dist + 200
 
-    logging.info("Depth data unavailable; using crop size " + str(crop_size))
+    logging.info("Depth data unavailable; using crop size %s", str(crop_size))
 
     return crop_size
 
@@ -104,7 +104,7 @@ def predict_crop_size(x, y, im_width, im_height, path_to_depth_file):
 
             crop_size = (4.0 / 15.0) * min_dist + 200
 
-            logging.info("Depth data unavailable; using crop size " + str(crop_size))
+            logging.info("Depth data unavailable; using crop size %s", str(crop_size))
         else:
             # crop_size = (30700.0/37.0)-(300.0/37.0)*distance
             # crop_size = 2600 - 220*distance
@@ -130,7 +130,7 @@ def predict_crop_size(x, y, im_width, im_height, path_to_depth_file):
 
         crop_size = (4.0 / 15.0) * min_dist + 200
 
-        logging.info("Depth data unavailable; using crop size " + str(crop_size))
+        logging.info("Depth data unavailable; using crop size %s", str(crop_size))
 
     return crop_size
 
@@ -210,9 +210,9 @@ for bbox in parse_voc_xmls("/home/anthony/Downloads/Tohme_dataset/2048_VOCformat
         output_filename = os.path.join(output_dir, pano_id+str(random_filename_padding)+".jpg")
         cropped_square.save(output_filename)
         print("Output file "+pano_id+str(random_filename_padding)+".jpg")
-        logging.info("Image: "+pano_id+str(random_filename_padding)+" Predicted crop "+str(crop_size)+"x"+str(crop_size)+"; actual "+str(bbox.get_width())+"x"+str(bbox.get_height())+"; depth "+str(depth))
+        logging.info("Image: %s%s Predicted crop %sx%s; actual %sx%s; depth %s", pano_id, str(random_filename_padding), str(crop_size), str(crop_size), str(bbox.get_width()), str(bbox.get_height()), str(depth))
 
         print("Predicted crop "+str(crop_size)+"x"+str(crop_size)+"; actual "+str(bbox.get_width())+"x"+str(bbox.get_height()))
     except (ValueError, IndexError) as e:
-        logging.info("Skipped crop for "+pano_id+"; no depth information at point.")
+        logging.info("Skipped crop for %s; no depth information at point.", pano_id)
         continue
