@@ -3,7 +3,7 @@ import xml.etree.ElementTree
 from utilities import *
 import logging
 from PIL import Image, ImageDraw
-from random import randint
+import secrets
 
 logging.basicConfig(filename='tohme3.log', level=logging.DEBUG)
 logging.info("Logging started!")
@@ -205,7 +205,7 @@ for bbox in parse_voc_xmls("/home/anthony/Downloads/Tohme_dataset/2048_VOCformat
         top_left_y = center_y - crop_height / 2
         cropped_square = im.crop((top_left_x, top_left_y, top_left_x + crop_width, top_left_y + crop_height))
         # Save the output
-        random_filename_padding = randint(1000,9999)
+        random_filename_padding = secrets.SystemRandom().randint(1000,9999)
         output_dir = "tohme_crops3"
         output_filename = os.path.join(output_dir, pano_id+str(random_filename_padding)+".jpg")
         cropped_square.save(output_filename)
