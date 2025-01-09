@@ -1,9 +1,9 @@
 
-import xml.etree.ElementTree
 from utilities import *
 import logging
 from PIL import Image, ImageDraw
 from random import randint
+import defusedxml.ElementTree
 
 logging.basicConfig(filename='tohme3.log', level=logging.DEBUG)
 logging.info("Logging started!")
@@ -152,7 +152,7 @@ def parse_voc_xmls(path_to_voc_xmls):
         if filename.endswith(".xml"):
             xml_path = os.path.join(path_to_voc_xmls, filename)
             print(xml_path)
-            e = xml.etree.ElementTree.parse(xml_path).getroot()
+            e = defusedxml.ElementTree.parse(xml_path).getroot()
 
             objs = e.findall('object')
 
